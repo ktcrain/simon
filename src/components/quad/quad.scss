@@ -1,0 +1,82 @@
+@use "../../styles/fluid" as *;
+
+$quad-inner-border: solid fluid-val(10rem, 64rem, 0.25rem, 1rem) #000;
+$quad-outer-border-radius: 20rem;
+
+@mixin quad-color($color) {
+  background: $color;
+  color: darken($color, 5%);
+  &:hover,
+  &.selected {
+    background: lighten($color, 5%);
+  }
+}
+
+.Quad {
+  cursor: pointer;
+  color: #fff;
+  width: 50%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: 0;
+  border: 0;
+  font-weight: bold;
+  @include fluid-type(20rem, 64rem, 2rem, 7rem);
+  transform: scale(1.05);
+  transition: transform 0.25s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  &:focus,
+  &:active {
+    outline: 0;
+  }
+  &.selected {
+    animation-name: buttonPress;
+    animation-duration: 0.25s;
+  }
+  &--green {
+    border-top-left-radius: $quad-outer-border-radius;
+    border-right: $quad-inner-border;
+    border-bottom: $quad-inner-border;
+    @include quad-color(#02995a);
+  }
+
+  &--red {
+    border-top-right-radius: $quad-outer-border-radius;
+    border-left: $quad-inner-border;
+    border-bottom: $quad-inner-border;
+    @include quad-color(#d92026);
+  }
+
+  &--yellow {
+    border-bottom-left-radius: $quad-outer-border-radius;
+    border-right: $quad-inner-border;
+    border-top: $quad-inner-border;
+    @include quad-color(#fde501);
+  }
+
+  &--blue {
+    border-bottom-right-radius: $quad-outer-border-radius;
+    border-left: $quad-inner-border;
+    border-top: $quad-inner-border;
+    @include quad-color(#127bc2);
+  }
+}
+
+/* The animation code */
+@keyframes buttonPress {
+  0% {
+    transform: scale(1.05);
+    box-shadow: 0;
+  }
+  50% {
+    transform: scale(1);
+    box-shadow: -2px -2px 20px 0px rgba(0, 0, 0, 0.5) inset;
+  }
+  100% {
+    transform: scale(1.05);
+    box-shadow: 0;
+  }
+}
